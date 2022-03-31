@@ -12,6 +12,6 @@ CREATE TABLE github_users (
 
 CREATE TABLE posts (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    text VARCHAR 255 NOT NULL,
+    text varchar(255) NOT NULL,
     user_id INT REFERENCES github_users(id)
 );
