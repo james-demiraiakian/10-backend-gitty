@@ -5,7 +5,7 @@ const app = require('../lib/app');
 
 jest.mock('../lib/utils/github');
 
-describe('10-gackend-gitty github user routes', () => {
+describe('10-backend-gitty github user routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
