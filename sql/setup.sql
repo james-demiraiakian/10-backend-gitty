@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS github_users CASCADE;
 DROP TABLE IF EXISTS posts CASCADE;
 
 CREATE TABLE github_users (
-    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    username TEXT NOT NULL,
+    id INT GENERATED ALWAYS AS IDENTITY,
+    username TEXT NOT NULL PRIMARY KEY,
     email TEXT,
     avatar TEXT
 );
@@ -13,5 +13,5 @@ CREATE TABLE github_users (
 CREATE TABLE posts (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     text varchar(255) NOT NULL,
-    user_id INT REFERENCES github_users(id)
+    username TEXT REFERENCES github_users(username)
 );
