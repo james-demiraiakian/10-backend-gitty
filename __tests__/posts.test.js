@@ -16,7 +16,7 @@ describe('github posts route', () => {
     pool.end();
   });
 
-  it('creats a post', async () => {
+  it('creates a post', async () => {
     await GithubUser.insert({
       username: 'fake_github_user',
       email: 'not-real@example.com',
@@ -90,21 +90,12 @@ describe('github posts route', () => {
     ];
 
     for (let i = 0; i < 5; i++) {
-      const post = await agent
+      await agent
         .post('/api/v1/posts')
         .send({ text: 'This is a post for the list of posts display' });
-      console.log('Inside posts.test.js list of posts for loop', post.body);
     }
     const res = await agent.get('/api/v1/posts');
-
-    console.log('a test log in posts.test.js', res.body);
 
     expect(res.body).toEqual(expected);
   });
 });
-
-// const posts = [...Array(5)].map((_, i) => ({
-//   text: `Unique text ${i + 1}`,
-//   username: `Unique user ${i + 1}`,
-// }));
-// const res = await Promise.all(posts.map((post) => Post.insert(post)));
