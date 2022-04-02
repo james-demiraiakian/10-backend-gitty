@@ -22,19 +22,12 @@ describe('10-backend-gitty github user routes', () => {
     );
   });
 
-  it('should redirect to /api/v1/github/dashboard after github OAuth', async () => {
-    const req = await request
+  it('should redirect to /api/v1/posts after github OAuth', async () => {
+    const res = await request
       .agent(app)
       .get('/api/v1/github/login/callback?code=42')
       .redirects(1);
 
-    expect(req.body).toEqual({
-      id: expect.any(Number),
-      username: 'fake_github_user',
-      email: 'not-real@example.com',
-      avatar: expect.any(String),
-      iat: expect.any(Number),
-      exp: expect.any(Number),
-    });
+    expect(res.req.path).toEqual('/api/v1/posts');
   });
 });
