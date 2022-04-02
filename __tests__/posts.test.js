@@ -1,7 +1,6 @@
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const GithubUser = require('../lib/models/GithubUser');
 const pool = require('../lib/utils/pool');
 
 const agent = request.agent(app);
@@ -17,11 +16,6 @@ describe('github posts route', () => {
   });
 
   it('creates a post', async () => {
-    await GithubUser.insert({
-      username: 'fake_github_user',
-      email: 'not-real@example.com',
-    });
-
     await agent.get('/api/v1/github/login/callback?code=42').redirects(1);
 
     const res = await agent
@@ -36,11 +30,6 @@ describe('github posts route', () => {
   });
 
   it('tests that post length is limited to 255 chars', async () => {
-    await GithubUser.insert({
-      username: 'fake_github_user',
-      email: 'not-real@example.com',
-    });
-
     await agent.get('/api/v1/github/login/callback?code=42').redirects(1);
 
     const res = await agent.post('/api/v1/posts').send({
@@ -54,11 +43,6 @@ describe('github posts route', () => {
   });
 
   it('returns a list of posts', async () => {
-    await GithubUser.insert({
-      username: 'fake_github_user',
-      email: 'not-real@example.com',
-    });
-
     await agent.get('/api/v1/github/login/callback?code=42').redirects(1);
 
     const expected = [
