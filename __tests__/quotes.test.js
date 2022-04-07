@@ -25,7 +25,7 @@ describe('github quotes route', () => {
       { author: expect.any(String), content: expect.any(String) },
     ];
 
-    const res = await agent.get();
+    const res = await agent.get('/api/v1/quotes');
 
     expect(res.body).toEqual(expected);
   });
